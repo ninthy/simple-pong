@@ -1,3 +1,3 @@
 # simple-pong
 Simple pong game with pygame module.
-![](https://i.imgur.com/1WZYQNu.gif)
+![]https://i.imgur.com/ByyOy9a.gif)
