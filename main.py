@@ -6,7 +6,7 @@ import random
         
 pygame.init()
 pygame.font.init() 
-font = pygame.font.SysFont('Arial', 30)
+font = pygame.font.SysFont('CenturyGothicRegular', 50)
 
 
 clock = pygame.time.Clock()
@@ -20,8 +20,9 @@ pygame.display.set_caption("Pong")
 
 #Components
 ball = pygame.Rect(WIDHT/2 - 15, HEIGHT/2 - 15, 30,30)
-player = pygame.Rect(10, HEIGHT/2 - 70, 27.5, 110)
-opponent = pygame.Rect(WIDHT - 37, HEIGHT/2 - 70, 27.5, 110)
+player = pygame.Rect(10, HEIGHT/2 - 70, 10, 140)
+opponent = pygame.Rect(WIDHT - 25, HEIGHT/2 - 70, 10, 140)
+
 light_grey = (220,220,220)
 
 
@@ -39,10 +40,10 @@ opponent_score = 0
 
 
 def update_scores():
-    text = f"{str(player_score)}:{str(opponent_score)}"
-    txt = font.render(text, False, light_grey)
+    text = f"{str(player_score)} {str(opponent_score)}"
+    txt = font.render(text, True, light_grey)
     txt_rect = txt.get_rect(center=(WIDHT/2, HEIGHT/2))
-    screen.blit(txt, (txt_rect.x - 20, txt_rect.y - 240))
+    screen.blit(txt, txt_rect)
     
 run = True
 while run:
@@ -80,7 +81,7 @@ while run:
             
     player.y += playerspeed
     opponent.y += opponentspeed
-
+    
     if player.top <= 0:
         	player.top = 0
     if player.bottom >= HEIGHT:
@@ -94,7 +95,6 @@ while run:
     
     ball.x += ballspeed_x
     ball.y += ballspeed_y
-    
     
     
     
@@ -129,16 +129,15 @@ while run:
    
    
     if opponent.colliderect(ball):
-        #ball.x = opponent.left
-        print(opponent.left)
-        ballspeed_x *= -1
+        ball.x = 750
         
-    
+        ballspeed_x *= -1
+
     screen.fill((0,0,0))
     pygame.draw.rect(screen, light_grey, ball)
-    pygame.draw.rect(screen, (0,255,0), player)
+    pygame.draw.rect(screen, light_grey, player)
     pygame.draw.rect(screen, light_grey, opponent)
-    
+    pygame.draw.line(screen, light_grey, (WIDHT/2, 0),(WIDHT/2,HEIGHT), 1)
     update_scores()
     
     pygame.display.flip()
